@@ -2,12 +2,13 @@
 # ---
 #
 # Named Directories:
-$IS_WSL && WIN_PATH="C:/Users/arthu"
-$IS_WSL && hash -d home=/mnt/c/Users/arthu
+$IS_WSL && WIN_PATH="C:/Users/mauri"
+$IS_WSL && hash -d home=/mnt/c/Users/mauri
 hash -d dev=~/software-development
 # Aliases
 $IS_WSL && alias home="cd ~home"
 alias dev="cd ~dev"
+alias sendspark="cd ~dev/sendspark"
 alias reload="source ~/.zshrc"
 alias install="sudo apt-get install"
 alias lg="lazygit"
@@ -36,6 +37,4 @@ alias l='ls -l'
 alias la='ls -a'
 alias lla='ls -la'
 if_exists lsd && alias lt='ls --tree --ignore-glob="**/node_modules/**"'
-# Use vscode insiders
-alias code="code-insiders"
 alias vim="nvim"
