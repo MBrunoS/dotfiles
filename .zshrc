@@ -28,6 +28,7 @@ $IS_WSL && [[ -f "$HOME/.zsh/wsl2fix.zsh" ]] && source "$HOME/.zsh/wsl2fix.zsh"
 [[ -f "$HOME/.zsh/pyenv.zsh" ]] && source "$HOME/.zsh/pyenv.zsh"
 [[ -f "$HOME/.zsh/libs.zsh" ]] && source "$HOME/.zsh/libs.zsh"
 [[ -f "$HOME/.zsh/ultrahook.zsh" ]] && source "$HOME/.zsh/ultrahook.zsh"
+[[ -f "$HOME/.zsh/redis.zsh" ]] && source "$HOME/.zsh/redis.zsh"
 
 # Load Artificial Intelligence
 [[ -f "$HOME/.zsh/ollama.zsh" ]] && source "$HOME/.zsh/ollama.zsh"
