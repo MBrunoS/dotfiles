@@ -1,4 +1,4 @@
-WINDOWS_USERNAME=arthu
+WINDOWS_USERNAME=mauri
 
 # Fix Interop Error that randomly occurs in vscode terminal when using WSL2
 fix_wsl2_interop() {

@@ -89,7 +89,7 @@ Some configurations may rely on additional tools. Install them using your prefer
 #### General
 
 ```bash
-brew install fzf ripgrep bat exa
+brew install git fzf ripgrep bat eza
 ```
 
 ---

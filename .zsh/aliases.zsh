@@ -6,6 +6,7 @@ hash -d dev=~/software-development
 # Aliases
 alias dev="cd ~dev"
 alias dot="cd ~/dotfiles"
+alias work="cd ~dev/work"
 alias reload="source ~/.zshrc"
 if_exists code && alias zshconfig="code $HOME/.zshrc"
 alias delete="rm -rf"
