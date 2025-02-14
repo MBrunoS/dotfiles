@@ -23,7 +23,7 @@ ENSURE_PACKAGES=false
 $IS_WSL && [[ -f "$HOME/.zsh/wsl2fix.zsh" ]] && source "$HOME/.zsh/wsl2fix.zsh"
 
 # Load Environment Handlers and Libraries
-[[ -f "$HOME/.zsh/nvm.zsh" ]] && source "$HOME/.zsh/nvm.zsh"
+[[ -f "$HOME/.zsh/fnm.zsh" ]] && source "$HOME/.zsh/fnm.zsh"
 [[ -f "$HOME/.zsh/volta.zsh" ]] && source "$HOME/.zsh/volta.zsh"
 [[ -f "$HOME/.zsh/pyenv.zsh" ]] && source "$HOME/.zsh/pyenv.zsh"
 [[ -f "$HOME/.zsh/libs.zsh" ]] && source "$HOME/.zsh/libs.zsh"
@@ -56,3 +56,21 @@ if [ -z "$SSH_CONNECTION" ] && [ -f "$HOME/.zsh/tmux.zsh" ]; then
 fi
 
 # -- System Added...
+
+# pnpm
+export PNPM_HOME="/home/mbrunos/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
+# fnm
+FNM_PATH="/home/mbrunos/.local/share/fnm"
+if [ -d "$FNM_PATH" ]; then
+  export PATH="/home/mbrunos/.local/share/fnm:$PATH"
+  eval "`fnm env`"
+fi
+
+eval "$(fnm env --use-on-cd --shell zsh)"
+# fnm end

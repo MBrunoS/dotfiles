@@ -1,6 +1,3 @@
-# NVM directory
-export NVM_DIR="$HOME/.nvm"
-
 # Vagrant config needed inside WSL2
 $IS_WSL && export VAGRANT_DEFAULT_PROVIDER="hyperv"
 $IS_WSL && export VAGRANT_WSL_ENABLE_WINDOWS_ACCESS="1"
