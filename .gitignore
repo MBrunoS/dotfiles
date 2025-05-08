@@ -16,3 +16,5 @@
 .aider*
 .env
 .DS_Store
+
+.config/gcloud
