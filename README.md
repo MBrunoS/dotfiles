@@ -26,18 +26,28 @@ Follow these steps to reproduce this setup on your own machine.
 ### Prerequisites
 
 Make sure you have the following installed:
+#### Git: For version control
+```bash
+sudo apt-get update
+sudo apt-get install git-all
+```
 
-- **zsh**: Install using your package manager (e.g., `brew install zsh` or `sudo apt install zsh`).
-- **tmux**: A terminal multiplexer (e.g., `brew install tmux` or `sudo apt install tmux`).
-- **Neovim**: A modern Vim-based editor (e.g., `brew install neovim` or `sudo apt install neovim`).
-- **GNU Stow**: For managing and symlinking dotfiles (e.g., `brew install stow` or `sudo apt install stow`).
+#### Homebrew: For managing packages
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+#### GNU Stow: For managing and symlinking dotfiles (e.g., `brew install stow` or `sudo apt install stow`).
+```bash
+brew install stow
+```
 
 ---
 
 ### 1️⃣ Clone the Repository
 
 ```bash
-git clone https://github.com/arthur404dev/dotfiles.git ~/dotfiles
+git clone https://github.com/mbrunos/dotfiles.git ~/dotfiles
 cd ~/dotfiles
 ```
 
@@ -89,7 +99,7 @@ Some configurations may rely on additional tools. Install them using your prefer
 #### General
 
 ```bash
-brew install git fzf ripgrep bat eza
+brew install git fzf ripgrep bat eza zsh tmux 
 ```
 
 ---
@@ -103,6 +113,13 @@ chsh -s $(which zsh)
 Log out and back in to apply the changes.
 
 ---
+
+### 6️⃣ Apply the catppuccin theme
+
+```bash
+
+bat cache --build
+```
 
 ## 🛠️ Customizing the Dotfiles
 
