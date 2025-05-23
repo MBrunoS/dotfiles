@@ -17,18 +17,20 @@ ENSURE_PACKAGES=false
 # Load Plugins and Themes
 [[ -f "$HOME/.zsh/plugins.zsh" ]] && source "$HOME/.zsh/plugins.zsh"
 [[ -f "$HOME/.zsh/starship.zsh" ]] && source "$HOME/.zsh/starship.zsh"
+[[ -f "$HOME/.zsh/catppuccin_mocha.zsh" ]] && source "$HOME/.zsh/catppuccin_mocha.zsh"
 
 # Load Homebrew and fix WSL2 interop
 [[ -f "$HOME/.zsh/homebrew.zsh" ]] && source "$HOME/.zsh/homebrew.zsh"
 $IS_WSL && [[ -f "$HOME/.zsh/wsl2fix.zsh" ]] && source "$HOME/.zsh/wsl2fix.zsh"
 
 # Load Environment Handlers and Libraries
-# [[ -f "$HOME/.zsh/fnm.zsh" ]] && source "$HOME/.zsh/fnm.zsh"
+[[ -f "$HOME/.zsh/fnm.zsh" ]] && source "$HOME/.zsh/fnm.zsh"
 [[ -f "$HOME/.zsh/volta.zsh" ]] && source "$HOME/.zsh/volta.zsh"
 [[ -f "$HOME/.zsh/pyenv.zsh" ]] && source "$HOME/.zsh/pyenv.zsh"
 [[ -f "$HOME/.zsh/libs.zsh" ]] && source "$HOME/.zsh/libs.zsh"
 [[ -f "$HOME/.zsh/ultrahook.zsh" ]] && source "$HOME/.zsh/ultrahook.zsh"
 [[ -f "$HOME/.zsh/redis.zsh" ]] && source "$HOME/.zsh/redis.zsh"
+[[ -f "$HOME/.zsh/gcloud.zsh" ]] && source "$HOME/.zsh/gcloud.zsh"
 
 # Load Artificial Intelligence
 [[ -f "$HOME/.zsh/ollama.zsh" ]] && source "$HOME/.zsh/ollama.zsh"
@@ -41,9 +43,6 @@ if [ -d "$HOME/.zsh/work" ] && [ "$(ls -A "$HOME/.zsh/work")" ]; then
     source "$file"
   done
 fi
-
-# Load catppuccin theme
-[[ -f "$HOME/.zsh/catppuccin_mocha.zsh" ]] && source "$HOME/.zsh/catppuccin_mocha.zsh"
 
 # Load All Programs from /programs
 if [ -d "$HOME/.zsh/programs" ] && [ "$(ls -A "$HOME/.zsh/programs")" ]; then
