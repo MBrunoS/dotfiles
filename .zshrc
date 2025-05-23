@@ -42,6 +42,9 @@ if [ -d "$HOME/.zsh/work" ] && [ "$(ls -A "$HOME/.zsh/work")" ]; then
   done
 fi
 
+# Load catppuccin theme
+[[ -f "$HOME/.zsh/catppuccin_mocha.zsh" ]] && source "$HOME/.zsh/catppuccin_mocha.zsh"
+
 # Load All Programs from /programs
 if [ -d "$HOME/.zsh/programs" ] && [ "$(ls -A "$HOME/.zsh/programs")" ]; then
   for file in "$HOME/.zsh/programs/"*; do
