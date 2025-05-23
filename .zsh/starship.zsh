@@ -7,7 +7,7 @@ fi
 LFILE="*-release"
 MFILE="/System/Library/CoreServices/SystemVersion.plist"
 if find /etc/ -maxdepth 1 -name $LFILE 2>/dev/null | grep -q .; then
-    _distro=$(awk '/^ID=/' /etc/*-release | awk -F'=' '{ print tolower($2) }')
+    _distro=$(awk '/^ID=/' /etc/os-release | awk -F'=' '{ print tolower($2) }')
 elif [[ -f $MFILE ]]; then
     _distro="macos"
 
