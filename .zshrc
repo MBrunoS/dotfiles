@@ -24,13 +24,14 @@ ENSURE_PACKAGES=false
 $IS_WSL && [[ -f "$HOME/.zsh/wsl2fix.zsh" ]] && source "$HOME/.zsh/wsl2fix.zsh"
 
 # Load Environment Handlers and Libraries
-[[ -f "$HOME/.zsh/fnm.zsh" ]] && source "$HOME/.zsh/fnm.zsh"
-[[ -f "$HOME/.zsh/volta.zsh" ]] && source "$HOME/.zsh/volta.zsh"
+# [[ -f "$HOME/.zsh/fnm.zsh" ]] && source "$HOME/.zsh/fnm.zsh"
+# [[ -f "$HOME/.zsh/volta.zsh" ]] && source "$HOME/.zsh/volta.zsh"
 [[ -f "$HOME/.zsh/pyenv.zsh" ]] && source "$HOME/.zsh/pyenv.zsh"
 [[ -f "$HOME/.zsh/libs.zsh" ]] && source "$HOME/.zsh/libs.zsh"
 [[ -f "$HOME/.zsh/ultrahook.zsh" ]] && source "$HOME/.zsh/ultrahook.zsh"
 [[ -f "$HOME/.zsh/redis.zsh" ]] && source "$HOME/.zsh/redis.zsh"
 [[ -f "$HOME/.zsh/gcloud.zsh" ]] && source "$HOME/.zsh/gcloud.zsh"
+[[ -f "$HOME/.zsh/opencode.zsh" ]] && source "$HOME/.zsh/opencode.zsh"
 
 # Load Artificial Intelligence
 [[ -f "$HOME/.zsh/ollama.zsh" ]] && source "$HOME/.zsh/ollama.zsh"
@@ -73,3 +74,19 @@ if [ -d "$FNM_PATH" ]; then
   export PATH="/home/mbrunos/.local/share/fnm:$PATH"
   eval "`fnm env`"
 fi
+
+# bun completions
+[ -s "/home/mbrunos/.bun/_bun" ] && source "/home/mbrunos/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+# Java
+export PATH="/home/linuxbrew/.linuxbrew/opt/openjdk@17/bin:$PATH"
+
+# Android
+export ANDROID_HOME="/home/mbrunos/Android/Sdk/"
+export PATH="$ANDROID_HOME:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
+export PATH=$PATH:$HOME/.maestro/bin
