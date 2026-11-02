@@ -1,0 +1,24 @@
+# Shell
+zsh
+git
+stow
+bat
+eza
+git-delta
+fd-find
+xclip
+neofetch
+
+# Development
+golang-1.24-go
+openjdk-17-jdk
+pipx
+gh
+postgresql
+ffmpeg
+
+# Apps
+code
+google-chrome-stable
+claude-desktop
+chatgpt

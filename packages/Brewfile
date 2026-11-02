@@ -1,0 +1,22 @@
+# Only what apt can't provide, or provides in a version too old for this setup.
+tap "anomalyco/tap"
+tap "joshmedeski/sesh"
+
+# Not in apt
+brew "lazygit"
+brew "rtk"
+brew "uv"
+brew "joshmedeski/sesh/sesh"
+
+# Required by sesh
+brew "tmux"
+brew "zoxide"
+brew "anomalyco/tap/opencode"
+
+# apt version is too old
+brew "fzf" # 0.44 lacks `fzf --zsh` and `--tmux`
+brew "ripgrep" # required by opencode
+brew "valkey", start_service: true # 7.2 may not load data written by 9.x
+brew "watchman" # 4.9
+
+cask "codex"

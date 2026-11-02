@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+# Installs everything listed in this folder. Safe to re-run.
+set -euo pipefail
+
+cd "$(dirname "$(readlink -f "$0")")"
+
+# Third-party apt repositories
+find apt/keys -type f | while IFS= read -r key; do
+  sudo install -Dm644 "$key" "/${key#apt/keys/}"
+done
+curl -fsSL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor | sudo tee /usr/share/keyrings/microsoft.gpg >/dev/null
+sudo install -m644 -t /etc/apt/sources.list.d apt/sources/*
+
+# apt packages
+sudo apt-get update
+grep -vE '^(#|$)' apt/packages.txt | xargs sudo apt-get install -y
+
+# Ubuntu installs bat as batcat and fd as fdfind
+mkdir -p "$HOME/.local/bin"
+ln -sf /usr/bin/batcat "$HOME/.local/bin/bat"
+ln -sf /usr/bin/fdfind "$HOME/.local/bin/fd"
+"$HOME/.local/bin/bat" cache --build
+
+# Homebrew packages
+/home/linuxbrew/.linuxbrew/bin/brew bundle install --no-upgrade --file=Brewfile
+
+# Tools with their own installers
+command -v claude >/dev/null || [ -x "$HOME/.local/bin/claude" ] || curl -fsSL https://claude.ai/install.sh | bash
+command -v pnpm >/dev/null || [ -x "$HOME/.local/share/pnpm/pnpm" ] || curl -fsSL https://get.pnpm.io/install.sh | sh -

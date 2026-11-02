@@ -1,7 +1,7 @@
-# Bash
-export PATH=$PATH:$(bash -ic 'echo $PATH')
+# Keep only the first occurrence of each PATH entry
+typeset -U path PATH
 # Golang
-if [ -f $BREW_PREFIX/bin/go ]; then
-    export PATH=$PATH:$(go env GOPATH)/bin
-    export PATH=$PATH:$(go env GOROOT)/bin
+if [ -x /usr/lib/go-1.24/bin/go ]; then
+    export PATH=$PATH:/usr/lib/go-1.24/bin
+    export PATH=$PATH:$HOME/go/bin
 fi

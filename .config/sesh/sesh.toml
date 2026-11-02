@@ -1,19 +1,14 @@
 [[session]]
 name = "tmux config"
 path = "~/.config/tmux/"
-startup_command = "nvim tmux.conf"
+startup_command = "code tmux.conf"
 
 [[session]]
 name = "dotfiles config"
 path = "~/dotfiles/"
-startup_command = "nvim ."
+startup_command = "code ."
 
 [[session]]
 name = "dev"
 path = "~/software-development/"
 startup_command = "l"
-
-[[session]]
-name = "monitoring"
-path = "~/"
-startup_command = "btop"

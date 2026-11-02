@@ -1,7 +1,7 @@
 # 🌟 My Dotfiles
 
 Welcome to my dotfiles repository!
-This setup is built for a **zsh** shell environment, with carefully tuned configurations for **tmux** and **Neovim** to enhance productivity and developer happiness.
+This setup is built for a **zsh** shell environment on Linux Mint, with carefully tuned configurations for **tmux** and **sesh** to enhance productivity and developer happiness.
 
 This setup is built for myself and is just a source of inspiration. I'm ok with you copying everything, but I'll probably not be giving support to all platforms and shells.
 
@@ -11,35 +11,26 @@ This setup is built for myself and is just a source of inspiration. I'm ok with 
 
 Here's a sneak peek of what your terminal could look like after applying these dotfiles:
 
-**Terminal (zsh + tmux + Neovim):**
+**Terminal (zsh + tmux):**
 ![Screenshot of Terminal](assets/terminal.png)
-
-**Neovim in action:**
-![Screenshot of Neovim](assets/nvim-full.png)
 
 ---
 
 ## 🚀 Getting Started
 
-Follow these steps to reproduce this setup on your own machine.
+Follow these steps to reproduce this setup on your own machine. The package setup targets Ubuntu 24.04-based systems such as Linux Mint 22.
 
 ### Prerequisites
 
-Make sure you have the following installed:
-#### Git: For version control
+#### Git, GNU Stow and curl
 ```bash
 sudo apt-get update
-sudo apt-get install git-all
+sudo apt-get install git stow curl
 ```
 
-#### Homebrew: For managing packages
+#### Homebrew
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-```
-
-#### GNU Stow: For managing and symlinking dotfiles (e.g., `brew install stow` or `sudo apt install stow`).
-```bash
-brew install stow
 ```
 
 ---
@@ -47,7 +38,7 @@ brew install stow
 ### 1️⃣ Clone the Repository
 
 ```bash
-git clone https://github.com/mbrunos/dotfiles.git ~/dotfiles
+git clone https://github.com/MBrunoS/dotfiles.git ~/dotfiles
 cd ~/dotfiles
 ```
 
@@ -55,52 +46,40 @@ cd ~/dotfiles
 
 ### 2️⃣ Backup Your Existing Configuration
 
-If you have existing configurations for zsh, tmux, or Neovim, back them up first:
+If you have existing configurations for zsh or tmux, back them up first:
 
 ```bash
 mv ~/.zshrc ~/.zshrc.backup
-mv ~/.tmux.conf ~/.tmux.conf.backup
-mv ~/.config/nvim ~/.config/nvim.backup
+mv ~/.zshenv ~/.zshenv.backup
+mv ~/.config/tmux ~/.config/tmux.backup
 ```
 
 ---
 
 ### 3️⃣ Use GNU Stow to Apply Dotfiles
 
-This repository uses [GNU Stow](https://www.gnu.org/software/stow/) to manage and symlink dotfiles. Stow makes it easy to keep your dotfiles modular and organized.
-
-To apply the dotfiles:
+This repository uses [GNU Stow](https://www.gnu.org/software/stow/) to symlink the dotfiles into your home directory:
 
 ```bash
 stow .
 ```
 
-#### How it works
+The repository is a single Stow package that mirrors your home directory:
 
-- **GNU Stow** creates symbolic links from `~/dotfiles/<module>` to your home directory.
-- For example:
-  - `~/dotfiles/zsh/.zshrc` → `~/.zshrc`
-  - `~/dotfiles/tmux/.tmux.conf` → `~/.tmux.conf`
-  - `~/dotfiles/nvim/init.vim` → `~/.config/nvim/init.vim`
+- `~/dotfiles/.zshrc` → `~/.zshrc`
+- `~/dotfiles/.config/tmux` → `~/.config/tmux`
 
-If you'd like to apply specific configurations only:
-
-```bash
-stow <module>
-# Example: stow zsh
-```
+Everything listed in `.stow-local-ignore` stays out of your home directory.
 
 ---
 
-### 4️⃣ Install Dependencies
-
-Some configurations may rely on additional tools. Install them using your preferred package manager:
-
-#### General
+### 4️⃣ Install Packages
 
 ```bash
-brew install git fzf ripgrep bat eza zsh tmux 
+~/dotfiles/packages/install
 ```
+
+This adds the third-party apt repositories, installs everything on the package lists, and installs Claude Code and pnpm if they're missing. It's safe to re-run, and it never upgrades what's already installed.
 
 ---
 
@@ -114,22 +93,55 @@ Log out and back in to apply the changes.
 
 ---
 
-### 6️⃣ Apply the catppuccin theme
+## 📦 Managing Packages
 
-```bash
+Packages are installed explicitly, never at shell startup. apt is preferred because Mint's updates keep it current; Homebrew only covers what apt can't provide or only has in a version too old for this setup.
 
-bat cache --build
-```
+| File | Contents |
+|---|---|
+| `packages/apt/packages.txt` | apt packages |
+| `packages/apt/sources`, `packages/apt/keys` | Third-party apt repositories and their public keys |
+| `packages/Brewfile` | Homebrew formulae and casks |
+
+- **Add a tool:** add it to a list, then run `~/dotfiles/packages/install`.
+- **Remove a tool:** delete it from the list and uninstall it with `sudo apt remove` or `brew uninstall`.
+- **Update:** use Mint's Update Manager for apt packages and `brew upgrade` for Homebrew.
+
+Tools outside these lists, such as Godot, the Android SDK, Docker and Flatpak apps, are installed by hand.
+
+---
+
+## 🖥️ Using tmux and sesh
+
+Opening a terminal shows the [sesh](https://github.com/joshmedeski/sesh) picker, with your preset sessions, tmux sessions and zoxide folders. Pick one to attach to it or create it, or press `Esc` for a plain shell. Preset sessions live in `.config/sesh/sesh.toml`.
+
+The tmux prefix is `Ctrl+a`.
+
+| Keys | Action |
+|---|---|
+| `prefix` + `f` | Open the sesh picker |
+| `prefix` + `.` | Rename the session after the current folder |
+| `prefix` + `\` / `prefix` + `-` | Split the pane horizontally / vertically |
+| `prefix` + `h` `j` `k` `l` | Move between panes |
+| `Alt+Shift+h` / `Alt+Shift+l` | Previous / next window |
+| `prefix` + `r` | Reload the tmux config |
+| Mouse selection | Copy to the system clipboard |
+
+---
 
 ## 🛠️ Customizing the Dotfiles
 
-Feel free to modify the configurations to suit your needs! Each module is neatly separated into directories (`zsh`, `tmux`, `nvim`), so you can tweak them individually.
+Feel free to modify the configurations to suit your needs!
+
+- `.zshrc` loads the modules in `.zsh`, and everything in `.zsh/programs`.
+- `.zsh/work` is for private files: they're loaded automatically and ignored by Git.
+- `.config` holds the configuration for each tool, including tmux and its status bar themes.
 
 ---
 
 ## 💡 Tips for Beginners
 
-- **Start Small**: Focus on one tool at a time (e.g., zsh first, then Neovim).
+- **Start Small**: Focus on one tool at a time (e.g., zsh first, then tmux).
 - **Experiment Safely**: Use version control (like Git) to track changes to your dotfiles.
 - **Learn and Adapt**: Look into the comments in each config file for explanations and tips.
 
@@ -144,8 +156,8 @@ Once you've configured your environment, feel free to share your own screenshots
 ## 🔗 Resources
 
 - [GNU Stow Documentation](https://www.gnu.org/software/stow/)
-- [Oh My Zsh](https://ohmyz.sh/)
-- [LazyVim](https://www.lazyvim.org/)
+- [sesh](https://github.com/joshmedeski/sesh)
+- [zinit](https://github.com/zdharma-continuum/zinit)
 - [tmux Documentation](https://github.com/tmux/tmux/wiki)
 
 ---
